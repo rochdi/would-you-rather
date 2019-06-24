@@ -50,7 +50,7 @@ class QuestionNew extends Component {
 
                 </form>
             </div>
-        )
+            ,  this.props.location)
     }
 
 }

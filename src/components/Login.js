@@ -11,7 +11,7 @@ class Login extends Component {
         const id = e.target.value
         if(id!==""){
             dispatch(setAuthedUser(id))
-            this.props.history.push('/')
+            this.props.history.push(this.props.location.state.referrer)
         } 
     }
 

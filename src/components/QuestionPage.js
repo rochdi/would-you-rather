@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import { withRouter, Redirect } from 'react-router-dom'
 import QuestionAsk from './QuestionAsk'
 import QuestionSummary from './QuestionSummary'
 import Secure from './Utils'
@@ -8,8 +9,9 @@ import Secure from './Utils'
 class QuestionPage extends Component{
     buildView(){
         const {authedUser, question, user, userAnswer} = this.props
-        if(question === null){
-            return <p>This question doesn't exist</p>
+        if(!question || question === null){
+            // return <p>This question  doesn't exist</p>
+            return (<Redirect to='/404' />)
         }
         
         if(userAnswer){
@@ -21,7 +23,7 @@ class QuestionPage extends Component{
 
     render(){
         const {authedUser} = this.props
-        return Secure(authedUser, this.buildView())
+        return Secure(authedUser, this.buildView(), this.props.location)
     }
 }
 
@@ -38,4 +40,4 @@ function mapStateToProps({authedUser, users, questions}, props) {
         userAnswer
     }
 }
-export default connect(mapStateToProps)(QuestionPage)
+export default withRouter(connect(mapStateToProps)(QuestionPage))

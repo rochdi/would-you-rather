@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Leader from './Leader'
 import Secure from './Utils'
+import { withRouter } from 'react-router-dom'
 
 class Leaderboard extends Component { 
     render(){
@@ -17,7 +18,7 @@ class Leaderboard extends Component {
                     ))
                 }
             </ul>
-        </div></div>)
+        </div></div>,  this.props.location)
     }
 }
 
@@ -38,5 +39,4 @@ function mapStateToProps({ authedUser, users, questions}){
     }
 }
 
-
-export default connect(mapStateToProps)(Leaderboard)
+export default withRouter(connect(mapStateToProps)(Leaderboard))
